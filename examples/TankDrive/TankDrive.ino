@@ -1,4 +1,4 @@
-#include <pico4drive.h>
+#include <Pico4Drive.h>
 
 pico4drive_t pico4drive;
 

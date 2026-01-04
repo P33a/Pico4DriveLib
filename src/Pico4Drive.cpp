@@ -27,7 +27,7 @@
   POSSIBILITY OF SUCH DAMAGE. */
 
 #include "Arduino.h"
-#include "pico4drive.h"
+#include "Pico4Drive.h"
 
 #define ADC_IN_PIN	28
 

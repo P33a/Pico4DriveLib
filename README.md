@@ -80,7 +80,7 @@ Motors are identified using the `driver_num_t` enum:
 
 ### Include the Library
 
-    #include <pico4drive.h>
+    #include <Pico4Drive.h>
 
 ### Create the Pico4Drive Object
 
