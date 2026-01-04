@@ -4,7 +4,7 @@ An Arduino-compatible C++ library for controlling all peripherals on the **Pico4
 
 Pico4Drive is designed for small robotics and high-current control applications, combining motor drivers, power management, expanded analog inputs, and safe voltage interfacing in a single board based on the Raspberry Pi Pico.
 
-This library exposes a low-level but flexible API matching the Pico4Drive hardware design, allowing precise control of motors, power management, and analog inputs.
+This library exposes a API matching the Pico4Drive hardware, allowing control of motors, power management, and analog inputs.
 
 ---
 
@@ -16,7 +16,7 @@ This library exposes a low-level but flexible API matching the Pico4Drive hardwa
   - High-resolution PWM (10-bit)
   - Voltage-based or raw PWM control
 
-- Power Management (AVR Tiny Controller)
+- Power Management (using the AVR Tiny Controller)
   - Software-controlled power-off
   - Battery voltage monitoring
   - ON button state and press counting
@@ -26,15 +26,15 @@ This library exposes a low-level but flexible API matching the Pico4Drive hardwa
   - 10 total analog inputs
     - 2 direct Pico ADC inputs
     - 8 multiplexed inputs
-  - Unified ADC read function
+  - multiplexed ADC read function
 
 - 5V Power Support
-  - On-board 5V switching regulator
-  - Safe interfacing with 5V (and up to 12V) signals via resistor dividers
+  - On-board 5V switching regulator (1A)
+  - Safe interfacing with 5V (and up to 12V) signals via two sets of resistor dividers
 
 - GPIO Access
   - All 13 header GPIO pins are free for user applications
-  - Internal Pico pins are reserved for board functions
+  - Some Pico pins are reserved for board functions
 
 ---
 
@@ -110,7 +110,7 @@ You may optionally specify a custom PWM frequency:
     pico4drive.PWM_limit;
 
 This value can be adjusted by user code to restrict the maximum motor voltage.
-By default, it is set to produce approximately **5.5 V output from a 7.4 V supply** (2× Li-Ion cells).
+By default, it is set to produce approximately **5.5 V output from a 7.4 V supply** (2 × Li-Ion cells).
 
 ---
 
@@ -129,7 +129,7 @@ Set motor output based on a desired voltage:
 
     pico4drive.set_driver_voltage(4.5, p2d_drv3);
 
-The voltage is internally converted to PWM using the current battery voltage.
+The voltage is internally converted to PWM using the measured current battery voltage.
 
 ---
 
@@ -137,11 +137,9 @@ The voltage is internally converted to PWM using the current battery voltage.
 
 ### Read Any ADC Channel
 
-Reads both direct and multiplexed analog inputs:
+Reads multiplexed analog inputs:
 
     uint16_t value = pico4drive.read_adc(0);
-
-Channel mapping depends on the Pico4Drive hardware configuration.
 
 ---
 
